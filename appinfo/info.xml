@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+  - SPDX-FileCopyrightText: 2026 Corbin Keener
+  - SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+<info xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
+	<id>audioannotations</id>
+	<name>Audio Annotations</name>
+	<summary>Timestamped text and voice notes on audio files</summary>
+	<description><![CDATA[Review recordings in Nextcloud. Audio files open in a waveform player where you highlight a range and attach a text or voice note to it, or leave a General Comment on the whole recording. Everyone the file is shared with can read the notes, reply and resolve them; notes can also be private. The Files sidebar lists the notes and exports them to Markdown or an Audacity label track.
+
+Requires ffmpeg and ffprobe on the server and background jobs through cron. Recording voice notes needs HTTPS.]]></description>
+	<version>0.6.27</version>
+	<licence>AGPL-3.0-or-later</licence>
+	<author>Corbin Keener</author>
+	<namespace>AudioAnnotations</namespace>
+	<category>files</category>
+	<category>multimedia</category>
+	<website>https://github.com/corbindk/audioannotations</website>
+	<bugs>https://github.com/corbindk/audioannotations/issues</bugs>
+	<repository type="git">https://github.com/corbindk/audioannotations.git</repository>
+	<dependencies>
+		<php min-version="8.1"/>
+		<!-- 32 only: the player relies on Viewer internals (src/viewer.js), recheck before allowing 33. -->
+		<nextcloud min-version="32" max-version="32"/>
+	</dependencies>
+	<background-jobs>
+		<job>OCA\AudioAnnotations\BackgroundJob\CleanupJob</job>
+	</background-jobs>
+</info>

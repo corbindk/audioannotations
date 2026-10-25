@@ -1,0 +1,22 @@
+# SPDX-FileCopyrightText: 2026 Corbin Keener
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Licensing for files that cannot carry a comment header (https://reuse.software).
+version = 1
+SPDX-PackageName = "audioannotations"
+SPDX-PackageSupplier = "Corbin Keener"
+SPDX-PackageDownloadLocation = "https://github.com/corbindk/audioannotations"
+
+[[annotations]]
+path = [
+	"package.json",
+	"package-lock.json",
+	"composer.json",
+	"composer.lock",
+	".stylelintrc.json",
+	"**/*.md",
+	"tests/fixtures/sample.mp3",
+	"screenshots/**",
+]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Corbin Keener"
+SPDX-License-Identifier = "AGPL-3.0-or-later"

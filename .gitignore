@@ -1,0 +1,13 @@
+# SPDX-FileCopyrightText: 2026 Corbin Keener
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+node_modules/
+vendor/
+build/
+.phpunit.cache/
+# Built by make build and shipped in the release archive, not committed.
+/js/
+/css/
+# Passwords for make test-e2e.
+.env.e2e
+.php-cs-fixer.cache

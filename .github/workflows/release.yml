@@ -1,0 +1,39 @@
+# SPDX-FileCopyrightText: 2026 Corbin Keener
+# SPDX-License-Identifier: AGPL-3.0-or-later
+#
+# Pushing a tag v<version> builds the release archive (the same files as make appstore) and attaches it to a
+# GitHub release. The tag must match <version> in appinfo/info.xml.
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check the tag matches appinfo/info.xml
+        run: |
+          version=$(sed -n 's:.*<version>\(.*\)</version>.*:\1:p' appinfo/info.xml)
+          test "v$version" = "$GITHUB_REF_NAME" || { echo "Tag $GITHUB_REF_NAME does not match version $version"; exit 1; }
+          echo "VERSION=$version" >> "$GITHUB_ENV"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Package
+        run: |
+          mkdir -p build
+          tar -czf "build/audioannotations-$VERSION.tar.gz" --transform 's,^,audioannotations/,' \
+            appinfo lib js css LICENSES README.md CHANGELOG.md
+      - name: Publish the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" "build/audioannotations-$VERSION.tar.gz" --title "$GITHUB_REF_NAME" --notes-file CHANGELOG.md

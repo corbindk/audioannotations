@@ -1,0 +1,48 @@
+# SPDX-FileCopyrightText: 2026 Corbin Keener
+# SPDX-License-Identifier: AGPL-3.0-or-later
+#
+# The same checks as make lint, make test, make test-js and make build. The end-to-end suite needs a
+# running Nextcloud and is run locally (make test-e2e).
+name: Checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: checks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  php:
+    name: PHP coding standard, Psalm, unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          coverage: none
+      - run: composer install --no-interaction --no-progress
+      - run: vendor/bin/php-cs-fixer fix --dry-run --diff
+      - run: php -d memory_limit=1G vendor/bin/psalm --no-cache --threads=2 --no-progress --output-format=github
+      - run: vendor/bin/phpunit
+
+  frontend:
+    name: ESLint, Stylelint, unit tests, build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npx eslint src tests vite.config.js vitest.config.js playwright.config.js eslint.config.js
+      - run: npx stylelint "src/**/*.{vue,css}"
+      - run: npx vitest run
+      - run: npm run build
