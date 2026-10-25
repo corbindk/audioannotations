@@ -125,9 +125,10 @@ async function setUp() {
 	await (await api('maya')).post(`${ocs}/notes/${keep.id}/replies`, { headers: auth('maya'), form: { body: 'Agreed, that is the take to match.' } })
 
 	// Wait for the background job to build the waveform (cron runs every 5 minutes).
+	// A dropped connection while the server is busy counts as not ready yet.
 	for (let i = 0; i < 80; i++) {
-		const res = await (await api('jordan')).get(`${ocs}/files/${id}/waveform`, { headers: auth('jordan') })
-		if (res.status() === 200) {
+		const res = await (await api('jordan')).get(`${ocs}/files/${id}/waveform`, { headers: auth('jordan') }).catch(() => null)
+		if (res?.status() === 200) {
 			break
 		}
 		await sleep(5000)
@@ -193,11 +194,9 @@ await sleep(800)
 await page.screenshot({ path: `${OUT}/note.png` })
 
 await page.goto(`${BASE}/apps/files/files/${id}?dir=/Recordings`)
-await page.waitForFunction(() => window.OCA?.Files?.Sidebar?.open)
-await page.evaluate(async (path) => {
-	await window.OCA.Files.Sidebar.open(path)
-	window.OCA.Files.Sidebar.setActiveTab('audioannotations')
-}, `/Recordings/${FILE}`)
+await page.locator(`[data-cy-files-list-row-name="${FILE}"]`).click({ button: 'right' })
+await page.getByRole('menuitem', { name: 'Details', exact: true }).click()
+await page.getByRole('tab', { name: 'Annotations' }).click()
 await page.locator('.ani').first().waitFor()
 await sleep(1000)
 await page.screenshot({ path: `${OUT}/sidebar.png` })

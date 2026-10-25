@@ -35,7 +35,7 @@ class NoteMapper extends QBMapper {
 		$qb->select('id')
 			->from($this->getTableName())
 			->where($qb->expr()->eq('owner_uid', $qb->createNamedParameter($uid)));
-		return array_map('intval', $qb->executeQuery()->fetchAll(\PDO::FETCH_COLUMN));
+		return array_map('intval', $qb->executeQuery()->fetchFirstColumn());
 	}
 
 	/**
@@ -50,7 +50,7 @@ class NoteMapper extends QBMapper {
 			->leftJoin('n', 'filecache', 'f', $qb->expr()->eq('f.fileid', 'n.file_id'))
 			->where($qb->expr()->isNull('f.fileid'))
 			->setMaxResults($limit);
-		return array_map('intval', $qb->executeQuery()->fetchAll(\PDO::FETCH_COLUMN));
+		return array_map('intval', $qb->executeQuery()->fetchFirstColumn());
 	}
 
 	/** @param list<int> $ids */

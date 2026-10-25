@@ -3,11 +3,11 @@
   - SPDX-FileCopyrightText: 2026 Corbin Keener
   - SPDX-License-Identifier: AGPL-3.0-or-later
 -->
-<!-- Static analysis against the Nextcloud 32 public API (nextcloud/ocp). `make psalm` runs it. -->
+<!-- Static analysis against the Nextcloud 34 public API (nextcloud/ocp). `make psalm` runs it. -->
 <psalm
 	errorLevel="4"
 	resolveFromConfigFile="true"
-	phpVersion="8.1"
+	phpVersion="8.2"
 	findUnusedBaselineEntry="true"
 	findUnusedCode="false"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"

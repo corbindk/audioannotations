@@ -134,11 +134,17 @@ export async function selectedRange(page) {
 
 /** Open the Files sidebar on a recording, on its Annotations tab. */
 export async function openSidebar(page, path) {
-	await page.waitForFunction(() => window.OCA?.Files?.Sidebar?.open)
-	await page.evaluate(async (p) => {
-		await window.OCA.Files.Sidebar.open(p)
-		window.OCA.Files.Sidebar.setActiveTab('audioannotations')
-	}, path)
+	// Files opens the sidebar itself for /apps/files/files/<id>; otherwise use the row's "Details" action.
+	// With the player open, use the viewer's own "Open sidebar" action.
+	const tabButton = page.getByRole('tab', { name: 'Annotations' })
+	if (await page.locator('.anp').isVisible()) {
+		await page.locator('.modal-header').getByRole('button', { name: 'Actions' }).click()
+		await page.getByRole('menuitem', { name: 'Open sidebar' }).click()
+	} else if (!(await tabButton.waitFor({ timeout: 5000 }).then(() => true, () => false))) {
+		await page.locator(`[data-cy-files-list-row-name="${path.split('/').pop()}"]`).click({ button: 'right' })
+		await page.getByRole('menuitem', { name: 'Details', exact: true }).click()
+	}
+	await tabButton.click()
 	const tab = page.locator('.audioannotations')
 	await tab.waitFor()
 	return tab

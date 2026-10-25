@@ -195,11 +195,11 @@ async function remove(note) {
 	}
 }
 
-function setFile(fileInfo) {
-	if (fileInfo?.id === fileId.value) {
+function setFile(node) {
+	if (!node || node.fileid === fileId.value) {
 		return
 	}
-	fileId.value = fileInfo.id
+	fileId.value = node.fileid
 	notes.value = []
 	load()
 }

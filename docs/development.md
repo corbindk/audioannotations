@@ -5,7 +5,7 @@ so nothing but Docker and `make` is needed on the host.
 
 ## Set up
 
-Put the repository where a Nextcloud 32 development instance loads apps, for example a bind mount at
+Put the repository where a Nextcloud 34 development instance loads apps, for example a bind mount at
 `custom_apps/audioannotations`, then:
 
 ```bash
