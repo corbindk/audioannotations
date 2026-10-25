@@ -2,13 +2,13 @@
 	"name": "audioannotations",
 	"version": "0.6.27",
 	"private": true,
-	"type": "module",
 	"license": "AGPL-3.0-or-later",
+	"type": "module",
 	"scripts": {
 		"build": "vite build && rm -rf css && mkdir css && mv js/*.css css/audioannotations.css",
-		"watch": "vite build --watch",
 		"lint": "eslint src vite.config.js eslint.config.js",
-		"stylelint": "stylelint \"src/**/*.{vue,css}\""
+		"stylelint": "stylelint \"src/**/*.{vue,css}\"",
+		"watch": "vite build --watch"
 	},
 	"dependencies": {
 		"@nextcloud/axios": "^2.6.0",

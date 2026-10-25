@@ -49,7 +49,7 @@ async function withStore(mode, fn) {
 /**
  * Unsent recordings for one audio file, oldest first. Empty when IndexedDB is unavailable.
  *
- * @param fileId
+ * @param {number} fileId the audio file's id
  */
 export async function listPending(fileId) {
 	try {
@@ -72,7 +72,7 @@ export async function discardPending(id) {
  * Keep the recording locally, upload it, then forget it. On failure it stays buffered and the error is rethrown.
  *
  * @param {object} voice { fileId, startMs, endMs, durationMs, caption, visibility, blob, type }
- * @param {(fraction: number) => void} [onProgress]
+ * @param {(fraction: number) => void} [onProgress] called with the uploaded fraction, 0 to 1
  */
 export async function saveVoiceNote(voice, onProgress) {
 	const pending = { id: voice.id ?? `${voice.fileId}-${Date.now()}`, createdAt: voice.createdAt ?? Date.now(), ...voice }

@@ -11,4 +11,11 @@ export default [
 	{
 		ignores: ['js/**', 'css/**', 'vendor/**', 'build/**'],
 	},
+	{
+		// As in Nextcloud server: doc comments where they help, not on every function.
+		// The other JSDoc rules still check the comments that exist.
+		rules: {
+			'jsdoc/require-jsdoc': 'off',
+		},
+	},
 ]

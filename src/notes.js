@@ -26,7 +26,7 @@ export const isGeneral = (note) => note.startMs === 0 && note.endMs === 0
 /**
  * Stack overlapping notes into lanes, first fit by start time.
  *
- * @param {{id: number, startMs: number, endMs: number}[]} notes
+ * @param {{id: number, startMs: number, endMs: number}[]} notes the notes to place
  * @return {{lanes: Map<number, number>, count: number}} note id → lane index, and the number of lanes
  */
 export function assignLanes(notes) {

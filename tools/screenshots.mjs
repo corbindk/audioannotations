@@ -44,6 +44,9 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 /**
  * About 4:30 of mono 16 kHz audio: phrases of uneven length and loudness with short pauses and a
  * syllable-like flutter, so the waveform looks like a sung or spoken take rather than a test tone.
+ *
+ * @param {number} seconds length of the recording
+ * @param {number} rate sample rate in Hz
  */
 function demoWav(seconds = 270, rate = 16000) {
 	const samples = seconds * rate

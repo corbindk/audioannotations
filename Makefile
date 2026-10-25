@@ -43,7 +43,7 @@ screenshots:
 lint:
 	$(PHP) vendor/bin/php-cs-fixer fix --dry-run --diff
 	$(PHP) php -d memory_limit=1G vendor/bin/psalm --no-cache --threads=4 --no-progress
-	$(NODE) npx eslint src tests tools vite.config.js vitest.config.js playwright.config.js eslint.config.js
+	$(NODE) npx eslint src tests tools package.json vite.config.js vitest.config.js playwright.config.js eslint.config.js
 	$(NODE) npx stylelint "src/**/*.{vue,css}"
 
 cs-fix:
