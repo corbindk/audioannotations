@@ -20,6 +20,9 @@ Requires ffmpeg and ffprobe on the server and background jobs through cron. Reco
 	<website>https://github.com/corbindk/audioannotations</website>
 	<bugs>https://github.com/corbindk/audioannotations/issues</bugs>
 	<repository type="git">https://github.com/corbindk/audioannotations.git</repository>
+	<screenshot>https://raw.githubusercontent.com/corbindk/audioannotations/main/screenshots/player.png</screenshot>
+	<screenshot>https://raw.githubusercontent.com/corbindk/audioannotations/main/screenshots/note.png</screenshot>
+	<screenshot>https://raw.githubusercontent.com/corbindk/audioannotations/main/screenshots/phone-zoomed.png</screenshot>
 	<dependencies>
 		<php min-version="8.1"/>
 		<!-- 32 only: the player relies on Viewer internals (src/viewer.js), recheck before allowing 33. -->

@@ -51,6 +51,18 @@ tests use Chromium's fake microphone, so their recordings end up in tester's tra
 Narrow a run with `make test-e2e ARGS="--project=phone tests/e2e/notes.spec.js"`. The HTML report is
 written to `build/playwright-report`.
 
+## Screenshots
+
+```bash
+make screenshots   # rewrites screenshots/*.png
+```
+
+`tools/screenshots.mjs` creates two demo users (`maya`, `jordan`) with the password in `DEMO_PASSWORD`,
+uploads a generated recording to maya's `Recordings` folder, shares it with jordan, replaces its notes with a
+fixed demo set and photographs the app as jordan on desktop and on a phone. Disable the `firstrunwizard`
+app on the instance first, or its welcome dialog appears in the pictures. If the waveform is not ready
+yet (it is built by cron), run it again.
+
 ## Release
 
 ```bash
