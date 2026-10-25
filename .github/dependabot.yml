@@ -1,16 +1,35 @@
 # SPDX-FileCopyrightText: 2026 Corbin Keener
 # SPDX-License-Identifier: AGPL-3.0-or-later
+#
+# Monthly, one grouped pull request per ecosystem. Major versions of app packages are skipped: they are
+# tied to Nextcloud 32 (doctrine/dbal 3, @nextcloud/*) or need code changes (Vite, wavesurfer.js), so they
+# are upgraded by hand. GitHub Actions take majors too.
 version: 2
 updates:
   - package-ecosystem: npm
     directory: /
     schedule:
       interval: monthly
+    ignore:
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major']
+    groups:
+      npm:
+        patterns: ['*']
   - package-ecosystem: composer
     directory: /
     schedule:
       interval: monthly
+    ignore:
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major']
+    groups:
+      composer:
+        patterns: ['*']
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: monthly
+    groups:
+      actions:
+        patterns: ['*']
