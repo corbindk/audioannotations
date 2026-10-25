@@ -5,7 +5,7 @@
 UID_GID := $(shell id -u):$(shell id -g)
 NODE := docker run --rm -u $(UID_GID) -e HOME=/tmp -v $(CURDIR):/app -w /app node:22-alpine
 COMPOSER := docker run --rm -u $(UID_GID) -e HOME=/tmp -v $(CURDIR):/app -w /app composer:2
-PHP := docker run --rm -u $(UID_GID) -v $(CURDIR):/app -w /app php:8.2-cli
+PHP := docker run --rm -u $(UID_GID) -v $(CURDIR):/app -w /app php:8.3-cli
 # End-to-end tests: the official Playwright image (version must match @playwright/test), on the host network
 # so NC_URL (default http://localhost:8090) is reachable. Passwords come from the environment or ENV_FILE.
 PLAYWRIGHT := docker run --rm --network host --ipc=host -u $(UID_GID) -e HOME=/tmp -v $(CURDIR):/app -w /app \

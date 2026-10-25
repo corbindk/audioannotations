@@ -33,7 +33,7 @@ the microphone.
 
 ## Requirements
 
-- Nextcloud 33 or 34
+- Nextcloud 33 to 35
 - `ffmpeg` and `ffprobe` on the server, and background jobs running through cron
 - HTTPS for recording voice notes
 

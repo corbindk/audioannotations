@@ -8,11 +8,6 @@
 // Psalm stubs for Nextcloud classes the app touches that are not in the nextcloud/ocp package.
 // Only for static analysis; never loaded at runtime.
 
-namespace OC\Hooks {
-	interface Emitter {
-	}
-}
-
 namespace OCA\Files\Event {
 	class LoadSidebar extends \OCP\EventDispatcher\Event {
 	}

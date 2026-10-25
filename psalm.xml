@@ -3,11 +3,11 @@
   - SPDX-FileCopyrightText: 2026 Corbin Keener
   - SPDX-License-Identifier: AGPL-3.0-or-later
 -->
-<!-- Static analysis against the Nextcloud 34 public API (nextcloud/ocp). `make psalm` runs it. -->
+<!-- Static analysis against the Nextcloud 35 public API (nextcloud/ocp). `make psalm` runs it. -->
 <psalm
 	errorLevel="4"
 	resolveFromConfigFile="true"
-	phpVersion="8.2"
+	phpVersion="8.3"
 	findUnusedBaselineEntry="true"
 	findUnusedCode="false"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -24,7 +24,7 @@
 		<directory name="vendor/nextcloud/ocp" />
 	</extraFiles>
 	<stubs>
-		<!-- OC\Hooks\Emitter and the Files/Viewer event classes, which nextcloud/ocp does not include. -->
+		<!-- The Files/Viewer event classes, which nextcloud/ocp does not include. -->
 		<file name="tests/stubs/nextcloud.php" preloadClasses="true" />
 	</stubs>
 </psalm>
