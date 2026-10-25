@@ -20,7 +20,7 @@
 		"@nextcloud/router": "^3.2.0",
 		"@nextcloud/vue": "^9.14.0",
 		"vue": "^3.5.44",
-		"wavesurfer.js": "^7.12.12"
+		"wavesurfer.js": "^8.0.3"
 	},
 	"devDependencies": {
 		"@nextcloud/eslint-config": "^9.0.1",
