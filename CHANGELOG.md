@@ -2,6 +2,8 @@
 
 ## 0.6.27 – first public version
 
+Requires Nextcloud 33, 34 or 35, PHP 8.2 or newer, and ffmpeg on the server.
+
 - Waveform player replacing the Viewer's audio player, with note bars, drag-to-select, Mark start and
   end, loop, zoom (pinch, slider, Ctrl/Cmd + scroll) and an overview strip while zoomed.
 - Text and voice notes from a box at the bottom of the player; General Comments at 0:00; private notes.
